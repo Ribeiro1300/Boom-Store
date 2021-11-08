@@ -1,5 +1,5 @@
 import axios from "axios";
 
-async function signup({ name, email, cpf, address, password }) {
+async function signUp({ name, email, cpf, address, password }) {
   const body = { name, email, cpf, address, password };
 }
