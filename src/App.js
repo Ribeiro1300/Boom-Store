@@ -1,10 +1,13 @@
-import React from "react"
+import React from "react";
+import GlobalStyle from "./globalStyles";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
-    <div>
-      <h1>Olá</h1>
-    </div>
+    <>
+      <GlobalStyle />
+      <Signup />
+    </>
   );
 }
 
