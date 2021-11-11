@@ -1,5 +1,6 @@
 import { produtos } from "../../Data";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
 export default function Products() {
@@ -41,11 +42,13 @@ export default function Products() {
 
 function RenderProducts(info) {
   return (
-    <Product>
-      <h1>{info.info.nome}</h1>
-      <h3>{info.info.preco.toFixed(2)}</h3>
-      <img src={info.info.img}></img>
-    </Product>
+    <Link to={"/:" + info.info.id}>
+      <Product>
+        <h1>{info.info.nome}</h1>
+        <h3>{info.info.preco.toFixed(2)}</h3>
+        <img src={info.info.img}></img>
+      </Product>
+    </Link>
   );
 }
 
@@ -70,6 +73,11 @@ const ProductsWrapper = styled.div`
   width: 70%;
   min-height: 100vh;
   margin: 20px 0px;
+
+  a {
+    text-decoration: none;
+    color: currentColor;
+  }
 `;
 
 const Product = styled.div`
