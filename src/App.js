@@ -14,14 +14,13 @@ function App() {
       <GlobalStyle />
       <Navbar />
       <Switch>
-        <Route path="/" exact></Route>
+        <Route path="/" exact>
+          <Products />
+        </Route>
         <Route path="/login">
           <Login />
         </Route>
-        <Route path="/products">
-          <Products />
-        </Route>
-        <Route path="/product/:product_id" exact>
+        <Route path="/:product_id" exact>
           <SingleProduct />
         </Route>
         <Route path="/cart">
