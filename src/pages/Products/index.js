@@ -80,6 +80,8 @@ const ProductsWrapper = styled.div`
   }
 `;
 
+
+
 const Product = styled.div`
   margin: 10px;
   padding: 10px;
