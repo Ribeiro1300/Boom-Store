@@ -1,15 +1,21 @@
 import styled from "styled-components";
 
 const PageWrapper = styled.div`
-  width: 100vw;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f2f3f4;
 `;
 
 const PageTitle = styled.p`
   font-size: 25px;
   font-weight: 700;
   display: flex;
-  margin-bottom: 20px;
   justify-content: left;
+  width: 100%;
   padding: 30px 50px;
   color: black;
   text-align: center;
@@ -50,6 +56,7 @@ const StyledForm = styled.form`
     justify-content: center;
     display: flex;
     align-items: center;
+    font-weight: bold;
   }
 `;
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Login from "./pages/LoginAndSignup";
-import Cart from "./pages/Cart/Cart";
+import Cart from "./pages/Cart";
 import Products from "./pages/Products";
 import SingleProduct from "./pages/SingleProduct";
 import Checkout from "./pages/Checkout";
