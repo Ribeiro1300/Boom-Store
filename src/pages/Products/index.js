@@ -1,100 +1,83 @@
-import { produtos } from "../../Data";
-import styled from "styled-components";
+import * as S from "./styles";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Products() {
-  const [productsList, setProductsList] = useState(produtos);
+  const [allProducts, setAllProducts] = useState([]);
+  useEffect(async () => {
+    const result = await axios.get(
+      //"https://projeto-15-boom-store.herokuapp.com/products"
+      "http://localhost:4000/products"
+    );
+    if (result.status === 201) {
+      setAllProducts(result.data);
+    }
+  }, []);
+  const [filter, setFilter] = useState("");
+  const newProducts = allProducts.filter((info) => {
+    if (
+      info.category.toUpperCase().includes(filter.toUpperCase()) ||
+      info.name.toUpperCase().includes(filter.toUpperCase())
+    ) {
+      return true;
+    }
+  });
 
   function changeFilter(value) {
-    let filter = value;
-    setProductsList(produtos.filter((info) => info.categoria == filter));
+    setFilter(value);
   }
   return (
-    <Content>
-      <Categories>
+    <S.Content>
+      <S.SearchItems>
+        <input
+          onChange={(info) => {
+            changeFilter(info.target.value);
+          }}
+          value={filter}
+          placeholder="Pesquisar"
+        ></input>
+      </S.SearchItems>
+      <S.Categories>
         <div
           onClick={() => {
-            setProductsList(produtos);
+            setFilter("");
           }}
         >
           Todas as categorias
         </div>
-        {produtos.map((info) => (
+        {newProducts.map((info) => (
           <div
             onClick={() => {
-              changeFilter(info.categoria);
+              changeFilter(info.category);
             }}
             key={info.id}
           >
-            {info.categoria}
+            {info.category}
           </div>
         ))}
-      </Categories>
-      <ProductsWrapper>
-        {productsList.map((info) => (
-          <RenderProducts key={info.id} info={info} />
-        ))}
-      </ProductsWrapper>
-    </Content>
+      </S.Categories>
+      <S.ProductsWrapper>
+        {newProducts != [] ? (
+          newProducts.map((info) => (
+            <RenderProducts key={info.id} info={info} />
+          ))
+        ) : (
+          <div>Nenhum produto encontrado</div>
+        )}
+      </S.ProductsWrapper>
+    </S.Content>
   );
 }
 
 function RenderProducts(info) {
   return (
-    <Link to={"/:" + info.info.id}>
-      <Product>
-        <h1>{info.info.nome}</h1>
-        <h3>{info.info.preco.toFixed(2)}</h3>
+    <Link to={"/" + info.info.id}>
+      <S.Product>
+        <h1>{info.info.name}</h1>
+        <h3>{info.info.price.toFixed(2)}</h3>
         <img src={info.info.img}></img>
-      </Product>
+      </S.Product>
     </Link>
   );
 }
-
-const Content = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  min-height: 100vh;
-  margin: 70px 0px 0px 0px;
-  background-color: #f4f5f6;
-`;
-
-const Categories = styled.div`
-  width: 20%;
-  height: 70vh;
-  margin: 30px 0px;
-`;
-
-const ProductsWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 70%;
-  min-height: 100vh;
-  margin: 20px 0px;
-
-  a {
-    text-decoration: none;
-    color: currentColor;
-  }
-`;
-
-
-
-const Product = styled.div`
-  margin: 10px;
-  padding: 10px;
-  width: 25vh;
-  height: 35vh;
-  background-color: white;
-  border-radius: 8px;
-
-  h3 {
-    color: #0e956a;
-  }
-
-  img {
-    width: 90%;
-  }
-`;

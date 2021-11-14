@@ -1,15 +1,11 @@
 import React from "react";
-import { IoSearchSharp, IoPersonSharp, IoCartOutline } from "react-icons/io5";
+import { IoPersonSharp, IoCartOutline } from "react-icons/io5";
 import styled from "styled-components";
 
 export default function Navbar() {
   return (
     <NavbarWrapper>
       <Logo> BoomStore </Logo>
-      <Searchbar>
-        procurar
-        <IoSearchSharp />
-      </Searchbar>
       <LoginAndCartIcons>
         <IoPersonSharp style={{ cursor: "pointer", marginRight: "10px" }} />
         <IoCartOutline />
@@ -39,18 +35,6 @@ const Logo = styled.div`
   color: #11e0ac;
   height: 100%;
   margin-left: 10px;
-`;
-
-const Searchbar = styled.div`
-  border: 1px solid green;
-  border-radius: 5px;
-  width: 40%;
-  height: 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 10px;
-  background-color: white;
 `;
 
 const LoginAndCartIcons = styled.div`
