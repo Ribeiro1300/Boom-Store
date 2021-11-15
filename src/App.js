@@ -1,28 +1,24 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Login from "./pages/LoginAndSignup";
 import Cart from "./pages/Cart/Cart";
 import Products from "./pages/Products";
 import SingleProduct from "./pages/SingleProduct";
 import Checkout from "./pages/Checkout";
-import GlobalStyle from "./globalStyles";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
-      <GlobalStyle />
+      <Navbar />
       <Switch>
         <Route path="/" exact>
-          <Login />
-        </Route>
-        <Route path="/signup">
-          <Signup />
-        </Route>
-        <Route path="/products">
           <Products />
         </Route>
-        <Route path="/product/:product_id" exact>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/:product_id" exact>
           <SingleProduct />
         </Route>
         <Route path="/cart">

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { SessionTitle, StyledForm } from "../sharedStyles";
 import styled from "styled-components";
+import { postSignUp } from "../../services/signUp";
+import { useHistory } from "react-router-dom";
 
 export default function Signup() {
+  const history = useHistory();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
@@ -9,13 +13,46 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  function signUp(e) {
+  async function signUp(e) {
     e.preventDefault();
+    if (checkPassword() && checkCpf()) {
+      postSignUp({
+        name,
+        email,
+        cpf,
+        address,
+        password,
+      })
+        .then(() => history.push("/"))
+        .catch((err) => {
+          console.log(err);
+          console.log("beterraba");
+        });
+    }
+  }
+
+  function checkPassword() {
+    if (password !== confirmPassword) {
+      alert("As senhas devem ser iguais");
+      setPassword("");
+      setConfirmPassword("");
+      return false;
+    }
+    return true;
+  }
+
+  function checkCpf() {
+    const cpf_regex = /[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}[-]?[0-9]{2}$/;
+    if (!cpf_regex.test(cpf)) {
+      alert("O cpf deve ser válido!");
+      return false;
+    }
+    return true;
   }
 
   return (
-    <PageWrapper>
-      <PageTitle>NOVO CADASTRO</PageTitle>
+    <SignupWrapper>
+      <SessionTitle>QUERO ME CADASTRAR</SessionTitle>
       <StyledForm>
         <input
           type="text"
@@ -67,43 +104,13 @@ export default function Signup() {
 
         <button onClick={signUp}> Cadastrar</button>
       </StyledForm>
-    </PageWrapper>
+    </SignupWrapper>
   );
 }
 
-const PageWrapper = styled.div`
+const SignupWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 100px 150px;
-`;
-const PageTitle = styled.p`
-  font-size: 25px;
-  font-weight: 700;
-  display: flex;
-  margin-bottom: 20px;
-  justify-content: center;
-  color: rgb(20, 163, 82);
-`;
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  input {
-    border: 0.8px solid black;
-    border-radius: 5px;
-    padding: 8px 4px;
-    font-size: 15px;
-    margin: 5px 0px;
-  }
-  button {
-    margin: 20px 0px;
-    border: 0.5 solid black;
-    border-radius: 5px;
-
-    font-size: 20px;
-    padding: 8px 4px;
-    cursor: pointer;
-  }
+  width: 100%;
+  padding: 10px 50px;
 `;

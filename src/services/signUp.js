@@ -1,5 +1,8 @@
-import axios from "axios";
+import API from "./api";
 
-async function signUp({ name, email, cpf, address, password }) {
+async function postSignUp({ name, email, cpf, address, password }) {
   const body = { name, email, cpf, address, password };
+  return API.post("/signup", body);
 }
+
+export { postSignUp };
