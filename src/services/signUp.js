@@ -1,7 +1,14 @@
 import API from "./api";
 
-async function postSignUp({ name, email, cpf, address, password }) {
-  const body = { name, email, cpf, address, password };
+async function postSignUp({
+  name,
+  email,
+  cpf,
+  address,
+  password,
+  confirmPassword,
+}) {
+  const body = { name, email, cpf, address, password, confirmPassword };
   return API.post("/signup", body);
 }
 

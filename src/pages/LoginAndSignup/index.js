@@ -9,7 +9,7 @@ export default function LoginAndSignup() {
   return (
     <PageWrapper>
       <PageTitle>
-        <IoPersonSharp /> Identificação
+        <IoPersonSharp style={{ marginRight: "10px" }} /> Identificação
       </PageTitle>
       <AuthorizationContainer>
         <Login />
@@ -22,4 +22,9 @@ export default function LoginAndSignup() {
 const AuthorizationContainer = styled.div`
   display: flex;
   width: 100vw;
+  margin-top: 20px;
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
 `;

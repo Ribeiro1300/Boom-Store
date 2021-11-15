@@ -2,7 +2,7 @@ import API from "./api";
 
 async function postLogIn({ email, password }) {
   const body = { email, password };
-  return API.post("/signup", body);
+  return await API.post("/login", body);
 }
 
 export { postLogIn };
