@@ -14,6 +14,10 @@ export const Categories = styled.div`
   width: 20%;
   height: 70vh;
   margin: 30px 0px;
+
+  div {
+    cursor: pointer;
+  }
 `;
 
 export const ProductsWrapper = styled.div`
@@ -26,6 +30,7 @@ export const ProductsWrapper = styled.div`
   a {
     text-decoration: none;
     color: currentColor;
+    height: 37vh;
   }
 `;
 

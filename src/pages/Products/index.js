@@ -6,9 +6,7 @@ import axios from "axios";
 export default function Products() {
   const [allProducts, setAllProducts] = useState([]);
   useEffect(async () => {
-    const result = await axios.get(
-      "https://projeto-15-boom-store.herokuapp.com/products"
-    );
+    const result = await axios.get("http://localhost:4000/products");
     if (result.status === 201) {
       setAllProducts(result.data);
     }
