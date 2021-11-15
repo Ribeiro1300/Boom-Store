@@ -9,7 +9,7 @@ export default function SingleProduct() {
   const history = useHistory();
   const id = useParams().product_id;
   useEffect(async () => {
-    const result = await axios.get("http://localhost:4000/singleProduct/" + id);
+    const result = await axios.get("https://projeto-15-boom-store.herokuapp.com/singleProduct/" + id);
     if (result.status === 201) {
       setProductInfo(result.data[0]);
     }

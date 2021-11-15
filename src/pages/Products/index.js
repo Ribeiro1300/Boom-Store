@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Products() {
   const [allProducts, setAllProducts] = useState([]);
   useEffect(async () => {
-    const result = await axios.get("http://localhost:4000/products");
+    const result = await axios.get("https://projeto-15-boom-store.herokuapp.com/products");
     if (result.status === 201) {
       setAllProducts(result.data);
     }
@@ -72,7 +72,7 @@ function RenderProducts(info) {
     <Link to={"/" + info.info.id}>
       <S.Product>
         <h1>{info.info.name}</h1>
-        <h3>{info.info.price.toFixed(2)}</h3>
+        <h3>R$ {info.info.price.toFixed(2)}</h3>
         <img src={info.info.img}></img>
       </S.Product>
     </Link>

@@ -6,7 +6,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { getCart } from "../../services/cart";
 import { useHistory } from "react-router";
 
-export default function cart() {
+export default function Cart() {
   const [products, setProducts] = useState([]);
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");

@@ -30,15 +30,13 @@ export const ProductsWrapper = styled.div`
   a {
     text-decoration: none;
     color: currentColor;
-    height: 37vh;
+    width: 28vh;
   }
 `;
 
 export const Product = styled.div`
   margin: 10px;
   padding: 10px;
-  width: 25vh;
-  height: 35vh;
   background-color: white;
   border-radius: 8px;
 
@@ -47,7 +45,7 @@ export const Product = styled.div`
   }
 
   img {
-    width: 90%;
+    width: 100%;
   }
 `;
 
@@ -62,7 +60,7 @@ export const SearchItems = styled.div`
     border: 0.5px solid black;
     border-radius: 6px;
     width: 50%;
-    height: 20px;
+    height: 65%;
 
     ::placeholder {
       text-align: center;

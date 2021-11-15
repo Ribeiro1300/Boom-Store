@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const SingleProductWrapper = styled.div`
   width: 80%;
-  height: 80vh;
   background-color: white;
   margin-top: 50px;
+  margin-bottom: 50px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -13,11 +13,20 @@ export const SingleProductWrapper = styled.div`
   h1 {
     margin: 30px;
     width: 100%;
-    font-size: 3em;
+    font-size: 2em;
   }
 
   img {
     width: 400px;
+    margin: 10px;
+    @media (max-width: 800px) {
+      width: 80%;
+    }
+  }
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
   }
 `;
 
@@ -41,6 +50,6 @@ export const AddCart = styled.button`
   border-radius: 7px;
   font-size: 1.2em;
   align-self: center;
-  margin-top: 50px;
+  margin: 50px 0px;
   cursor: pointer;
 `;
