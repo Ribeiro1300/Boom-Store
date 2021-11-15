@@ -22,12 +22,24 @@ export default function Signup() {
         cpf,
         address,
         password,
+        confirmPassword,
       })
-        .then(() => history.push("/"))
+        .then(() => {
+          alert("Usuário criado com sucsso!");
+          history.push("/");
+        })
         .catch((err) => {
-          console.log(err);
-          console.log("beterraba");
+          processError(err.response.status);
         });
+    }
+  }
+
+  function processError(status) {
+    if (status === 409) {
+      alert("E-mail ou CPF já cadastrados no sistema!");
+    }
+    if (status === 400) {
+      alert("Insira o CPF corretamente (11 dígitos numéricos)");
     }
   }
 
@@ -42,7 +54,7 @@ export default function Signup() {
   }
 
   function checkCpf() {
-    const cpf_regex = /[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}[-]?[0-9]{2}$/;
+    const cpf_regex = /[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}$/;
     if (!cpf_regex.test(cpf)) {
       alert("O cpf deve ser válido!");
       return false;
@@ -53,7 +65,7 @@ export default function Signup() {
   return (
     <SignupWrapper>
       <SessionTitle>QUERO ME CADASTRAR</SessionTitle>
-      <StyledForm>
+      <StyledForm onSubmit={signUp}>
         <input
           type="text"
           placeholder="Nome"
@@ -102,7 +114,7 @@ export default function Signup() {
           value={confirmPassword}
         />
 
-        <button onClick={signUp}> Cadastrar</button>
+        <button type="submit"> Cadastrar</button>
       </StyledForm>
     </SignupWrapper>
   );
