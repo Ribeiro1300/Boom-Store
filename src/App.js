@@ -5,23 +5,20 @@ import Cart from "./pages/Cart";
 import Products from "./pages/Products";
 import SingleProduct from "./pages/SingleProduct";
 import Checkout from "./pages/Checkout";
-import GlobalStyle from "./globalStyles";
 import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
-      <GlobalStyle />
       <Navbar />
       <Switch>
-        <Route path="/" exact></Route>
+        <Route path="/" exact>
+          <Products />
+        </Route>
         <Route path="/login">
           <Login />
         </Route>
-        <Route path="/products">
-          <Products />
-        </Route>
-        <Route path="/product/:product_id" exact>
+        <Route path="/:product_id" exact>
           <SingleProduct />
         </Route>
         <Route path="/cart">
