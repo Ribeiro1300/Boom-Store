@@ -1,18 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SessionTitle, StyledForm } from "../sharedStyles";
 import styled from "styled-components";
 import { IoEnterOutline } from "react-icons/io5";
 import { postLogIn } from "../../services/logIn";
+import { useHistory } from "react-router";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  let history = useHistory();
+  const token = localStorage.getItem("token");
+
+  useEffect(checkLocalToken, [history, token]);
+
+  function checkLocalToken() {
+    if (token) {
+      history.push("/profile");
+    }
+  }
 
   function logIn(e) {
     e.preventDefault();
     postLogIn({ email, password })
-      .then((res) => console.log(res.data?.token))
+      .then((res) => {
+        saveUserDataOnLocalStorage({
+          token: res.data.token,
+          name: res.data.userName,
+          id: res.data.id,
+        });
+        alert(`Bem-vindo, ${res.data.userName}!`);
+        history.push("/");
+      })
       .catch((err) => {
+        console.log(err);
         processError(err.response.status);
       });
   }
@@ -24,6 +44,12 @@ export default function Login() {
     if (status === 400) {
       alert("Falha no login! e-mail ou senha não podem ser vazios");
     }
+  }
+
+  function saveUserDataOnLocalStorage({ token, name, id }) {
+    localStorage.setItem("userID", id);
+    localStorage.setItem("token", token);
+    localStorage.setItem("name", name);
   }
 
   return (

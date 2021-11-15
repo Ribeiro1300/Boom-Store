@@ -3,20 +3,27 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import CartProduct from "../../components/CartProduct";
 import { IoCartOutline } from "react-icons/io5";
+import { getCart } from "../../services/cart";
+import { useHistory } from "react-router";
 
 export default function cart() {
   const [products, setProducts] = useState([]);
+  const token = localStorage.getItem("token");
+  const id = localStorage.getItem("id");
+  let history = useHistory();
 
   useEffect(fetchCartProducts, []);
 
-  function fetchCartProducts() {
-    const testProduct = {
-      img: "https://images.kabum.com.br/produtos/fotos/129451/processador-amd-ryzen-9-5950x-cache-72mb-3-4ghz-4-9ghz-max-turbo-am4-100-100000065box_1602603581_m.jpg",
-      name: "placa mãe muito legal",
-      price: 500.5,
-    };
-    console.log(testProduct);
-    setProducts([testProduct, testProduct]);
+  async function fetchCartProducts() {
+    try {
+      const APIresponse = await getCart({ token, userID: id });
+
+      console.log(APIresponse.data.products);
+      setProducts([...APIresponse.data.products]);
+    } catch (err) {
+      alert("Houve um erro ao carregar o carrinho");
+      history.push("/");
+    }
   }
 
   function getTotalPrice() {
