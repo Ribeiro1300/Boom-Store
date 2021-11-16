@@ -14,6 +14,11 @@ export default function Cart() {
   useEffect(fetchCartProducts, []);
 
   async function fetchCartProducts() {
+    if (!token) {
+      alert("logue-se para ver o carrinho!");
+      history.push("/login");
+      return;
+    }
     try {
       const APIresponse = await getCart({ token });
       setProducts([...APIresponse.data.products]);

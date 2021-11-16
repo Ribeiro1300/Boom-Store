@@ -30,6 +30,9 @@ export default function SingleProduct() {
       if (APIresponse.status === 200) {
         alert("Produto adicionado ao carrinho!");
       }
+      if (APIresponse.status === 409) {
+        alert("Produto já foi adicionado ao carrinho!");
+      }
     } else {
       alert("Por favor, faça login antes");
       history.push("/login");
