@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 import { Content } from "../Products/styles";
+import { postProductInCart } from "../../services/cart";
 import * as S from "./styles";
 
 export default function SingleProduct() {
@@ -9,19 +10,33 @@ export default function SingleProduct() {
   const history = useHistory();
   const id = useParams().product_id;
   useEffect(async () => {
-    const result = await axios.get("https://projeto-15-boom-store.herokuapp.com/singleProduct/" + id);
+    // const result = await axios.get(
+    //   "https://projeto-15-boom-store.herokuapp.com/singleProduct/" + id
+    // );
+    const result = await axios.get("http://localhost:4021/singleProduct/" + id);
     if (result.status === 201) {
       setProductInfo(result.data[0]);
     }
   }, []);
-  function addToCart() {
-    if (localStorage.getItem("userID")) {
-      sendProductToCart(productInfo);
+
+  async function addToCart() {
+    const userId = localStorage.getItem("userID");
+    const token = localStorage.getItem("token");
+    if (token) {
+      const APIresponse = await postProductInCart({
+        userId,
+        productId: id,
+        token,
+      });
+      if (APIresponse.status === 200) {
+        alert("Produto adicionado ao carrinho!");
+      }
     } else {
       alert("Por favor, faça login antes");
       history.push("/login");
     }
   }
+
   return (
     <Content>
       <S.SingleProductWrapper>
@@ -40,8 +55,4 @@ export default function SingleProduct() {
       </S.SingleProductWrapper>
     </Content>
   );
-}
-
-function sendProductToCart(product) {
-  console.log(product);
 }

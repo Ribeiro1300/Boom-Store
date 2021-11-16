@@ -6,7 +6,6 @@ import Products from "./pages/Products";
 import SingleProduct from "./pages/SingleProduct";
 import Checkout from "./pages/Checkout";
 import Navbar from "./components/Navbar";
-import Style from "./AppStyle";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./utils/ProtectedRoute";
 
