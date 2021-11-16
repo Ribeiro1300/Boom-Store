@@ -9,6 +9,8 @@ import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./utils/ProtectedRoute";
 
+import "./styles/reset.css"
+
 function App() {
   return (
     <BrowserRouter>
