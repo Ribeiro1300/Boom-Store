@@ -71,7 +71,7 @@ export default function Products() {
 
 function RenderProducts(info) {
   return (
-    <Link to={"/" + info.info.id}>
+    <Link to={"/products/" + info.info.id}>
       <S.Product>
         <h1>{info.info.name}</h1>
         <h3>R$ {info.info.price.toFixed(2)}</h3>
