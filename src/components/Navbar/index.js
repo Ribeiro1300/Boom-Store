@@ -23,7 +23,6 @@ export default function Navbar() {
 }
 
 const NavbarWrapper = styled.div`
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap");
   font-family: "Poppins", sans-serif;
   width: 100%;
   height: 70px;
