@@ -9,16 +9,18 @@ import { useHistory } from "react-router";
 export default function Cart() {
   const [products, setProducts] = useState([]);
   const token = localStorage.getItem("token");
-  const id = localStorage.getItem("id");
   let history = useHistory();
 
   useEffect(fetchCartProducts, []);
 
   async function fetchCartProducts() {
+    if (!token) {
+      alert("logue-se para ver o carrinho!");
+      history.push("/login");
+      return;
+    }
     try {
-      const APIresponse = await getCart({ token, userID: id });
-
-      console.log(APIresponse.data.products);
+      const APIresponse = await getCart({ token });
       setProducts([...APIresponse.data.products]);
     } catch (err) {
       alert("Houve um erro ao carregar o carrinho");
@@ -41,7 +43,7 @@ export default function Cart() {
         Carrinho
       </PageTitle>
       <ProductsContainer>
-        {products === [] ? (
+        {products.length === 0 ? (
           <CartWarning>
             {"Parece que ainda não há nenhum produto no seu carrinho..."}
           </CartWarning>
@@ -76,6 +78,7 @@ export default function Cart() {
 }
 
 const ProductsContainer = styled.div`
+  font-family: "Poppins", sans-serif;
   width: 80%;
   display: flex;
   margin-top: 20px;
@@ -113,6 +116,7 @@ const CheckoutMessage = styled.div`
 
 const CheckoutPrice = styled.span`
   font-size: 26px;
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
 `;
 
@@ -127,6 +131,7 @@ const CheckoutButton = styled.div`
   font-size: 20px;
   font-weight: 700;
   color: white;
+  font-family: "Poppins", sans-serif;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   margin-top: 20px;
   &:hover {

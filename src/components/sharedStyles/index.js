@@ -29,7 +29,7 @@ const SessionTitle = styled.p`
   justify-content: center;
   color: black;
   text-align: center;
-  font: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
 `;
 
 const StyledForm = styled.form`
