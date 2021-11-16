@@ -15,4 +15,9 @@ async function postProductInCart({ userId, productId, token }) {
   return await API.post("/cart", body, config);
 }
 
-export { getCart, postProductInCart };
+async function postCheckout({ token }) {
+  const config = createHeaders(token);
+  return await API.delete("/cart", config);
+}
+
+export { getCart, postProductInCart, postCheckout };

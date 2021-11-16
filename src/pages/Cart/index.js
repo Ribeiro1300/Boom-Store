@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import CartProduct from "../../components/CartProduct";
 import { IoCartOutline } from "react-icons/io5";
-import { getCart } from "../../services/cart";
+import { getCart, postCheckout } from "../../services/cart";
 import { useHistory } from "react-router";
 
 export default function Cart() {
@@ -34,6 +34,16 @@ export default function Cart() {
       priceSum += parseFloat(p.price);
     }
     return priceSum.toFixed(2);
+  }
+
+  async function checkout() {
+    try {
+      const APIresponse = await postCheckout(token);
+      if (APIresponse.status === 200) alert("Compra efeituada com sucesso!");
+      history.push("/");
+    } catch (err) {
+      alert("Houve um erro no checkout!");
+    }
   }
 
   return (
@@ -69,7 +79,7 @@ export default function Cart() {
                 R$ {getTotalPrice().replace(".", ",")}{" "}
               </CheckoutPrice>
             </CheckoutMessage>
-            <CheckoutButton>Checkout</CheckoutButton>
+            <CheckoutButton onClick={checkout}>Checkout</CheckoutButton>
           </CheckoutPreview>
         </CheckoutPreviewContainer>
       )}
